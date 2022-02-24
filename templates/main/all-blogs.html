@@ -1,0 +1,49 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    All Blogs | Oganik
+{% endblock title %}
+
+{% block content %}
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+            <!-- /.page-header__bg -->
+            <div class="container">
+                <h2>Blog</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="index.html">HOME</a></li>
+                    <li>/</li>
+                    <li>BLOGS</li>
+                </ul><!-- /.thm-breadcrumb list-unstyled -->
+            </div><!-- /.container -->
+        </section><!-- /.page-header -->
+
+        <div class="blog-page">
+            <div class="container">
+                <div class="row">
+                    {% for blog in blog_obj %}
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <a href="../blog/{{blog.id}}">
+                            <div class="blog-card">
+                                <div class="blog-card__image">
+                                    <div class="blog-card__date">{{blog.created_at}}</div><!-- /.blog-card__date -->
+                                    <img src="{{blog.img.url}}" alt="{{blog.title}}" height="250px" width="150px">
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <h3>{{blog.title}}</h3>
+                                    <p>{{blog.description}}</p>
+                                </div><!-- /.blog-card__content -->
+                            </div><!-- /.blog-card -->
+                        </a>
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-4 -->
+                    {% endfor %}
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.blog-page -->
+
+{% endblock content %}

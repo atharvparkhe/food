@@ -1,0 +1,36 @@
+{% extends '../base3.html' %}
+{% load static %}
+
+{% block title %}
+    Seller Forgot | Oganik
+{% endblock title %}
+
+{% block content %}
+	<!-- wrapper -->
+	<div class="wrapper">
+		<div class="authentication-forgot d-flex align-items-center justify-content-center">
+			<div class="card forgot-box">
+				<div class="card-body">
+					<div class="p-4 rounded  border">
+						<h4 class="mt-5 font-weight-bold">Forgot Password?</h4>
+						<p class="text-muted">Enter your registered email ID to reset the password</p>
+						<form method="POST">
+							{% csrf_token %}
+							<div class="my-4">
+								<label class="form-label">Email id</label>
+								<input name="email" type="text" class="form-control form-control-lg" placeholder="example@user.com" />
+							</div>
+							<div class="d-grid gap-2">
+								<button type="submit" class="btn btn-primary btn-lg">Send</button>
+							</div>
+						</form>
+						<div class="d-grid gap-2">
+							<a href="{% url 'shopkeeper-login' %}" class="btn btn-light btn-lg"><i class='bx bx-arrow-back me-1'></i>Back to Login</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end wrapper -->
+{% endblock content %}

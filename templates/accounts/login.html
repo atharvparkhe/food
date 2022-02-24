@@ -1,0 +1,47 @@
+{% extends '../base2.html' %}
+{% load static %}
+
+{% block title %}
+    Login | Oganik
+{% endblock title %}
+
+{% block content %}
+
+	<div class="wrap-login100">
+		<div class="login100-pic js-tilt" data-tilt>
+			<img src="{% static 'images/img-01.png' %}" alt="IMG">
+		</div>
+
+		<form method="POST" class="login100-form validate-form">
+			{% csrf_token %}
+			<span class="login100-form-title">
+				LOGIN
+			</span>
+			<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+				<input class="input100" type="email" name="email" placeholder="Email">
+				<span class="focus-input100"></span>
+			</div>
+			<div class="wrap-input100 validate-input" data-validate = "Password is required">
+				<input class="input100" type="password" name="password" placeholder="Password">
+				<span class="focus-input100"></span>
+			</div>
+			<div class="container-login100-form-btn">
+				<button type="submit" class="login100-form-btn">
+					Login
+				</button>
+			</div>
+			<div class="text-center p-t-12">
+				<a class="txt2" href="{% url 'forgot' %}">
+					Forgot Password?
+				</a>
+			</div>
+			<div class="text-center p-t-136">
+				<a class="txt2" href="{% url 'signup' %}">
+					Create your Account
+					<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+				</a>
+			</div>
+		</form>
+	</div>
+
+{% endblock content %}

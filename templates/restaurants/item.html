@@ -1,0 +1,133 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    {{item.name}} | Oganik
+{% endblock title %}
+
+{% block content %}
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+            <!-- /.page-header__bg -->
+            <div class="container">
+                <h2>Product</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li>/</li>
+                    <li>ITEM</li>
+                </ul><!-- /.thm-breadcrumb list-unstyled -->
+            </div><!-- /.container -->
+        </section><!-- /.page-header -->
+
+
+        <section class="product_detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="product_detail_image">
+                            <img src="{{item.img.url}}" alt="{{item.name}}">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="product_detail_content">
+                            <h2>{{item.name}}</h2>
+                            <div class="product_detail_review_box">
+                                <div class="product_detail_price_box">
+                                    <p>$ {{item.price}}</p>
+                                </div>
+                                <div class="product_detail_review">
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#" class="deactive"><i class="fa fa-star"></i></a>
+                                    <span>Customer Reviews</span>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled category_tag_list">
+                                <li><span>Category :</span>{{item.food_category.food_category}}</li>
+                                <li><span>Description :</span>{{item.description}}</li>
+                            </ul><br>
+                            <div class="addto-cart-box">
+                                <a href="../../../add-to-cart/{{item.id}}" class="thm-btn">Add to Cart</a>
+                            </div>
+                            <div class="product_detail_share_box">
+                                <div class="share_box_title">
+                                    <h2>Share with friends</h2>
+                                </div>
+                                <div class="share_box_social">
+                                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-two">
+            <div class="container">
+                <div class="block-title text-center">
+                    <div class="block-title__decor"></div><!-- /.block-title__decor -->
+                    <p>Recently Added</p>
+                    <h3>Similar Products</h3>
+                </div><!-- /.block-title -->
+                <div class="thm-tiny__slider" id="product-two__carousel" data-tiny-options='{
+            "container": "#product-two__carousel",
+            "items": 1,
+            "slideBy": "page",
+            "gutter": 0,
+            "mouseDrag": true,
+            "autoplay": true,
+            "nav": false,
+            "controlsPosition": "bottom",
+            "controlsText": ["<i class=\"fa fa-angle-left\"></i>", "<i class=\"fa fa-angle-right\"></i>"],
+            "autoplayButtonOutput": false,
+            "responsive": {
+                "640": {
+                  "items": 2,
+                  "gutter": 30
+                },
+                "992": {
+                  "gutter": 30,
+                  "items": 3
+                },
+                "1200": {
+                  "disable": true
+                }
+              }
+        }'>
+                    {% for similar in similar_obj %}
+                    <div>
+                        <div class="product-card__two">
+                            <div class="product-card__two-image">
+                                <span class="product-card__two-sale">sale</span>
+                                <img src="{{similar.img.url}}" alt="{{similar.name}}" height="300px" width="200px">
+                                <div class="product-card__two-image-content">
+                                    <a href="../../../add-to-cart/{{similar.id}}"><i class="organik-icon-shopping-cart"></i></a>
+                                </div><!-- /.product-card__two-image-content -->
+                            </div><!-- /.product-card__two-image -->
+                            <div class="product-card__two-content">
+                                <h3><a href="../{{similar.id}}">{{similar.name | safe}}</a></h3>
+                                <div class="product-card__two-stars">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div><!-- /.product-card__two-stars -->
+                                <p>$ {{similar.price | safe}}</p>
+                            </div><!-- /.product-card__two-content -->
+                        </div><!-- /.product-card__two -->
+                    </div>
+                    {% endfor %}
+                </div>
+            </div><!-- /.container -->
+        </section><!-- /.product-two -->
+
+{% endblock content %}

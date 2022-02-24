@@ -1,0 +1,51 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    All Restaurants | Oganik
+{% endblock title %}
+
+{% block content %}
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+            <!-- /.page-header__bg -->
+            <div class="container">
+                <h2>RESTAURANTS</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li>/</li>
+                    <li>RESTAURANTS</li>
+                </ul><!-- /.thm-breadcrumb list-unstyled -->
+            </div><!-- /.container -->
+        </section><!-- /.page-header -->
+
+
+        <section class="products-page">
+            <div class="container">
+                <div class="row">
+                    {% for restaurant in restaurants %}
+                        <div class="row">
+                            
+                            <div class="col-md-6 col-lg-4">
+                                
+                                <div class="product-card">
+                                    <div class="product-card__image">
+                                        <a href="../restaurant/{{restaurant.id}}">
+                                            <img src="{{restaurant.img.url}}" height="250px" width="250px" alt="{{restaurant.name}}">
+                                        </a>
+                                    </div><!-- /.product-card__image -->
+                                </div><!-- /.product-card -->
+                                
+                            </div><!-- /.col-md-6 col-lg-4 -->
+                            
+                        </div><!-- /.row -->
+                        {% endfor %}
+                    </div><!-- /.col-sm-12 col-md-12 col-lg-9 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.products-page -->
+{% endblock content %}

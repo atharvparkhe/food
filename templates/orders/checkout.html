@@ -1,0 +1,148 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    Checkout | Oganik
+{% endblock title %}
+
+{% block content %}
+		<div class="stricky-header stricked-menu main-menu">
+			<div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+		</div><!-- /.stricky-header -->
+		<section class="page-header">
+			<div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+			<!-- /.page-header__bg -->
+			<div class="container">
+				<h2>CHECKOUT</h2>
+				<ul class="thm-breadcrumb list-unstyled">
+					<li><a href="{% url 'home' %}">HOME</a></li>
+					<li>/</li>
+					<li><span>CHECKOUT</span></li>
+				</ul><!-- /.thm-breadcrumb list-unstyled -->
+			</div><!-- /.container -->
+		</section><!-- /.page-header -->
+
+		<section class="checkout-page">
+			<div class="container">
+				<div class="table-responsive">
+                    <table class="table cart-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+						{% for item in items_obj %}
+                            <tr>
+                                <td>
+                                    <div class="product-box">
+                                        <img src="{{item.item.img.url}}" alt="{{item.item.name}}" height="150px" width="200px">
+                                        <h3><a href="product-details.html">{{item.item.name | safe}}</a></h3>
+                                    </div><!-- /.product-box -->
+                                </td>
+                                <td>$ {{item.item.price | safe}}</td>
+                                <td>
+                                    <p>{{item.quantity | safe}}</p>
+                                </td>
+                                <td>$ {{item.total | safe}}</td>
+                            </tr>
+						{% endfor %}
+                        </tbody>
+
+                    </table><!-- /.table -->
+                </div><!-- /.table-responsive -->
+				<h3 class="order-title">Your Order</h3>
+				<div class="row">
+					<div class="col-lg-4">
+						<ul class="cart-total list-unstyled">
+							<li>
+								<h5><b><u>Subtotal :</u></b></h5>
+								<p>$ {{cart_obj.total_amt | safe}}</p>
+							</li>
+							<li>
+								<h5><b><u>Shipping Cost :</u></b></h5>
+								<p>$0.00 USD</p>
+							</li>
+							<li>
+								<h5><b><u>Total :</u></b></h5>
+								<p>$ {{cart_obj.total_amt | safe}}</p>
+							</li>
+						</ul><!-- /.cart-total -->
+					</div><!-- /.col-lg-4 -->
+	
+					<div class="col-md-6">
+						<div class="order-payment">
+							<h2 class="para-title"> Shipment Details</h2>
+							<br>
+						{% for add in address %}
+						<span class="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<b><u>ADDRESS :</u></b>
+						</span>
+						<div id="collapseTwo" class="collapse show" role="button" aria-labelledby="collapseTwo" data-parent="#accordion">
+							<p>{{add.address | safe}}</p>
+						</div>
+						<br>
+						<span class="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<b><u>PIN-CODE :</u></b>
+						</span>
+						<div id="collapseTwo" class="collapse show" role="button" aria-labelledby="collapseTwo" data-parent="#accordion">
+							<p>{{add.pincode | safe}}</p>
+						</div>
+						<br>
+						<span class="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<b><u>LANDMARK :</u></b>
+						</span>
+						<div id="collapseTwo" class="collapse show" role="button" aria-labelledby="collapseTwo" data-parent="#accordion">
+							<p>{{add.landmark | safe}}</p>
+						</div>
+						{% endfor %}
+						</div><!-- /.order-payment -->
+						<div class="text-right">
+							<button type="submit" id="rzp-button1" class="thm-btn">PROCEED TO PAYMENT</button>
+						</div><!-- /.text-right -->
+					</div><!-- /.col-md-6 -->
+				</div>
+				
+			</div><!-- /.container -->
+		</section><!-- /.checkout-page -->
+
+{% endblock content %}
+
+{% block myjs %}
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script>
+	var options = {
+		"key": "{{key}}", // Enter the Key ID generated from the Dashboard
+		"amount": "{{cart_obj.total_amt}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+		"currency": "INR",
+		"name": "Oganik",
+		"description": "Payment",
+		"image": "{% static 'images/loader.png' %}",
+		"order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+		"handler": function (response){
+			console.log(response)
+        	window.location.href = `/success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`    
+    	},
+		"prefill": {
+			"name": "{{cart_obj.owner.name}}",
+			"email": "{{cart_obj.owner.email}}",
+			"contact": "{{cart_obj.owner.phone}}"
+		},
+		"notes": {
+			"address": "Razorpay Corporate Office"
+		},
+		"theme": {
+			"color": "#38d98b"
+		}
+	};
+	var rzp1 = new Razorpay(options);
+	document.getElementById('rzp-button1').onclick = function(e){
+		rzp1.open();
+		e.preventDefault();
+	}
+	</script>
+
+{% endblock myjs %}

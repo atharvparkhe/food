@@ -1,0 +1,75 @@
+{% extends '../base3.html' %}
+{% load static %}
+
+{% block title %}
+    Seller Signup | Oganik
+{% endblock title %}
+
+{% block content %}
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
+					<div class="col mx-auto">
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+										<h3 class="">Sign Up</h3>
+										<p>Already have an account?<a href="{% url 'shopkeeper-login' %}">Sign in here</a>
+										</p>
+									</div>
+									<div class="form-body">
+										<form class="row g-3" method="POST">
+											{% csrf_token %}
+											<div class="col-12">
+												<label for="inputName" class="form-label">Name</label>
+												<input type="text" name="name" class="form-control" id="inputFirstName" placeholder="Jhon">
+											</div>
+											<div class="col-12">
+												<label for="inputEmailAddress" class="form-label">Email Address</label>
+												<input type="email" name="email" class="form-control" id="inputEmailAddress" placeholder="example@user.com">
+											</div>
+											<div class="col-12">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+													<input type="password" name="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"></a>
+												</div>
+											</div>
+											<div class="col-6">
+												<label for="inputChoosePassword" class="form-label">Aadhar Number</label>
+												<div class="input-group" id="form-label">
+													<input type="text" name="aadhar" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Aadhar Number"></a>
+												</div>
+											</div>
+											<div class="col-6">
+												<label for="inputChoosePassword" class="form-label">GST Number</label>
+												<div class="input-group" id="form-label">
+													<input type="text" name="gst" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter GST Number"></a>
+												</div>
+											</div>
+											<div class="col-6">
+												<div class="form-check form-switch">
+													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+													<label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms & Conditions</label>
+												</div>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="submit" class="btn btn-primary"><i class='bx bx-user'></i>Sign up</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+{% endblock content %}

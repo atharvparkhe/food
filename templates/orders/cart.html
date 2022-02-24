@@ -1,0 +1,97 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    Cart | Oganik
+{% endblock title %}
+
+{% block content %}
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url({"% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+            <!-- /.page-header__bg -->
+            <div class="container">
+                <h2>Cart</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li>/</li>
+                    <li>CART</li>
+                </ul><!-- /.thm-breadcrumb list-unstyled -->
+            </div><!-- /.container -->
+        </section><!-- /.page-header -->
+
+        <section class="cart-page">
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table cart-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items_obj %}
+                                <tr>
+                                    <td>
+                                        <div class="product-box">
+                                            <img src="{{item.item.img.url}}" alt="{{item.item.name}}" height="150px" width="200px">
+                                            <h3><a href="../restaurant/item/{{item.item.id}}">{{item.item.name | safe}}</a></h3>
+                                        </div><!-- /.product-box -->
+                                    </td>
+                                    <td>$ {{item.item.price | safe}}</td>
+                                    <td>
+                                        <a href="../add-to-cart/{{item.item.id}}" class="sub">+</a>
+                                        <p>{{item.quantity | safe}}</p>
+                                        <a href="../remove-from-cart/{{item.item.id}}" class="add">-</a>
+                                    </td>
+                                    <td>$ {{item.total | safe}}</td>
+                                    <td>
+                                        <a href="../delete-from-cart/{{item.item.id}}"><i class="organik-icon-close remove-icon"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table><!-- /.table -->
+                </div><!-- /.table-responsive -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form action="/cart/apply-coupon/{{cart_obj.id}}/" method="POST" class="contact-one__form">
+                            {% csrf_token %}
+                            <input type="text" name="coupon" placeholder="Enter Coupon Code">
+                            <button type="submit" class="thm-btn">Apply Coupon</button>
+                        </form><!-- /.contact-one__form -->
+                    </div><!-- /.col-lg-8 -->
+                    <div class="col-lg-4">
+                        <ul class="cart-total list-unstyled">
+                            <li>
+                                <span>Subtotal</span>
+                                <span>$ {{cart_obj.total_amt | safe}}</span>
+                            </li>
+                            <li>
+                                <span>Shipping Cost</span>
+                                <span>$ 0.00 USD</span>
+                            </li>
+                            <li>
+                                <span>Total</span>
+                                <span>$ {{cart_obj.total_amt | safe}}</span>
+                            </li>
+                        </ul><!-- /.cart-total -->
+                        <div class="button-box">
+                            <a></a>
+                            <a href="{% url 'checkout' %}" class="thm-btn">Checkout</a><!-- /.thm-btn -->
+                        </div><!-- /.button-box -->
+                    </div><!-- /.col-lg-4 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.cart-page -->
+
+        {% endblock content %}

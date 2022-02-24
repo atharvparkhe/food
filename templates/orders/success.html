@@ -1,0 +1,62 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    Payment Successfull
+{% endblock title %}
+
+{% block content %}
+		<div class="stricky-header stricked-menu main-menu">
+			<div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+		</div><!-- /.stricky-header -->
+		<section class="page-header">
+			<div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+			<!-- /.page-header__bg -->
+			<div class="container">
+				<h2>Payment Successfull</h2>
+				<h3 class="order-title">Your Order</h3>
+			</div><!-- /.container -->
+		</section><!-- /.page-header -->
+		
+		<section class="checkout-page">
+			<div class="container">
+				<div class="table-responsive">
+                    <table class="table cart-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+						{% for item in items_obj %}
+                            <tr>
+                                <td>
+                                    <div class="product-box">
+                                        <img src="{{item.item.img.url}}" alt="{{item.item.name}}" height="150px" width="200px">
+                                        <h3><a href="product-details.html">{{item.item.name | safe}}</a></h3>
+                                    </div><!-- /.product-box -->
+                                </td>
+                                <td>$ {{item.item.price | safe}}</td>
+                                <td>
+                                    <p>{{item.quantity | safe}}</p>
+                                </td>
+                                <td>$ {{item.total | safe}}</td>
+                            </tr>
+						{% endfor %}
+						</tbody>
+                    </table><!-- /.table -->
+                </div><!-- /.table-responsive -->
+				<div class="text-center">
+					<div class="order-payment">
+						<h2 class="para-title">Your order will be delivered within 3 hours</h2>
+					</div>
+					<a href="{% url 'all-restaurants' %}" class="thm-btn">Continue Shopping</a>
+				</div><!-- /.col-md-6 -->
+			</div><!-- /.container -->
+		</section><!-- /.checkout-page -->
+
+
+		{% endblock content %}

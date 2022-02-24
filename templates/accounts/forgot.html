@@ -1,0 +1,27 @@
+{% extends '../base2.html' %}
+{% load static %}
+
+{% block title %}
+    Forgot | Oganik
+{% endblock title %}
+
+{% block content %}
+
+	<form method="POST" class="login100-form validate-form">
+		{% csrf_token %}
+		<span class="login100-form-title">
+			FORGOT PASSWORD
+		</span>
+		<div class="wrap-input100 validate-input" data-validate = "Email is required">
+			<input class="input100" type="email" name="email" placeholder="Email">
+			<span class="focus-input100"></span>
+		</div>
+		
+		<div class="container-login100-form-btn">
+			<button type="submit" class="login100-form-btn">
+				CHANGE PASSWORD
+			</button>
+		</div>
+	</form>
+			
+{% endblock content %}

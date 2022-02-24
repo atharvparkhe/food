@@ -1,0 +1,102 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    Blog  | Oganik
+{% endblock title %}
+
+{% block content %}
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+            <!-- /.page-header__bg -->
+            <div class="container">
+                <h2>Blog Details</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="index.html">Home</a></li>
+                    <li>/</li>
+                    <li>Blog</li>
+                </ul><!-- /.thm-breadcrumb list-unstyled -->
+            </div><!-- /.container -->
+        </section><!-- /.page-header -->
+
+        <section class="blog-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="blog-card__image blog-details__image">
+                            <div class="blog-card__date">{{blog_obj.created_at}}</div><!-- /.blog-card__date -->
+                            <img src="{{blog_obj.img.url}}" class="img-fluid" alt="{{blog_obj.title}}" height="600px" width="600px">
+                        </div><!-- /.blog-card__image -->
+                        <div class="blog-card__meta">
+                            <a href="news-details.html"><i class="far fa-user-circle"></i> by {{blog_obj.author}}</a>
+                        </div><!-- /.blog-card__meta -->
+                        <div class="blog-details__content blog-card__content">
+                            <h3>{{blog_obj.title}}</h3>
+                            {{blog_obj.content}}
+                        </div><!-- /.blog-details__content -->
+                        <br><hr>
+
+                        <div class="blog-comment">
+                            <h2>Comments</h2>
+                            {% for comment in comment_obj %}
+                            <div class="blog-comment__box">
+                                <div class="blog-comment__content">
+                                    <div class="blog-comment__content-top">
+                                        <h3>{{comment.commenter.name}}</h3>
+                                        <span>{{comment.created_at}}</span>
+                                    </div><!-- /.blog-comment__content-top -->
+                                    <p>{{comment.comment}}</p>
+                                </div><!-- /.blog-comment__content -->
+                            </div><!-- /.blog-comment__box -->
+                            {% endfor %}
+                        </div><!-- /.blog-comment -->
+                        <div class="comment-form">
+                            <h2>Leave a Comment</h2>
+                            
+                            <form method="POST" class="contact-one__form contact-form-validated">
+                            {% csrf_token %}
+                            {% if request.user.is_authenticated %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <textarea name="message" placeholder="Your Message"></textarea>
+                                    </div><!-- /.col-lg-12 -->
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="thm-btn">Submit Comment</button><!-- /.thm-btn -->
+                                    </div><!-- /.col-lg-12 -->
+                                </div><!-- /.row -->
+                            </form>
+                            {% else %}
+                            <p>Please <a href="{% url 'login' %}">login</a> to leave a comment.</p>
+                            {% endif %}
+                        </div><!-- /.comment-form -->
+                    </div><!-- /.col-md-12 col-lg-9 -->
+                    <div class="col-md-12 col-lg-4">
+                        <div class="blog-sidebar">
+                            <div class="blog-sidebar__search">
+                                <form action="#">
+                                    <input type="text" placeholder="Search">
+                                    <button type="submit"><i class="organik-icon-magnifying-glass"></i></button>
+                                </form>
+                            </div><!-- /.blog-sidebar__search -->
+                            <div class="blog-sidebar__posts">
+                                <h3>Recent Posts</h3>
+                                <ul>
+                                    {% for blogs in all_blog %}
+                                    <li>
+                                        <img src="{{blogs.img.url}}" alt="{{blogs.title}}" height="70px" width="70px">
+                                        <span>{{blogs.created_at}}</span>
+                                        <h4><a href="../{{blogs.id}}">{{blogs.title}}</a></h4>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div><!-- /.blog-sidebar__posts -->
+                        </div><!-- /.blog-sidebar -->
+                    </div><!-- /.col-md-12 col-lg-9 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.blog-details -->
+
+{% endblock content %}

@@ -1,0 +1,132 @@
+{% load static %}
+    <!--sidebar wrapper -->
+    <div class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <div>
+                <img src="{% static 'assets/images/logo-icon.png' %}" class="logo-icon" alt="logo icon">
+            </div>
+            <div>
+                <h4 class="logo-text">Rukada</h4>
+            </div>
+            <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+            </div>
+        </div>
+        <!--navigation-->
+        <ul class="metismenu" id="menu">
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
+                    <div class="menu-title">Dashboard</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'all-products' %}">
+                    <div class="parent-icon"><i class='bx bx-cart'></i></div>
+                    <div class="menu-title">eCommerce</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'profile' %}">
+                    <div class="parent-icon"><i class="bx bx-user-circle"></i></div>
+                    <div class="menu-title">User Profile</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'contact' %}" target="_blank">
+                    <div class="parent-icon"><i class="bx bx-support"></i>
+                    </div>
+                    <div class="menu-title">Support</div>
+                </a>
+            </li>
+        </ul>
+        <!--end navigation-->
+    </div>
+    <!--end sidebar wrapper -->
+    <!--start header -->
+    <header>
+        <div class="topbar d-flex align-items-center">
+            <nav class="navbar navbar-expand">
+                <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
+                </div>
+                <div class="top-menu ms-auto">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
+                                <i class='bx bx-bell'></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="javascript:;">
+                                    <div class="msg-header">
+                                        <p class="msg-header-title">Notifications</p>
+                                        <p class="msg-header-clear ms-auto">Marks all as read</p>
+                                    </div>
+                                </a>
+                                <div class="header-notifications-list">
+                                    <!-- for loop -->
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i></div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">Notification Title<span class="msg-time float-end">Notification time</span></h6>
+                                                <p class="msg-info">Notification desc</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- for loop -->
+                                </div>
+                                <a href="javascript:;">
+                                    <div class="text-center msg-footer">View All Notifications</div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
+                                <i class='bx bx-comment'></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="javascript:;">
+                                    <div class="msg-header">
+                                        <p class="msg-header-title">Messages</p>
+                                        <p class="msg-header-clear ms-auto">Marks all as read</p>
+                                    </div>
+                                </a>
+                                <div class="header-message-list">
+                                    <!-- for loop -->
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-online">
+                                                <img src="{% static 'assets/images/avatars/avatar-1.png' %}" class="msg-avatar" alt="user avatar">
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">Messages From<span class="msg-time float-end">Messages time</span></h6>
+                                                <p class="msg-info">Messages desc</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- for loop -->
+                                </div>
+                                <a href="javascript:;">
+                                    <div class="text-center msg-footer">View All Messages</div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user-box dropdown">
+                    <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{restaurant_obj.img.url}}" class="user-img" alt="{{restaurant_obj.name}}">
+                        <div class="user-info ps-3">
+                            <p class="user-name mb-0">{{restaurant_obj.name}}</p>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bx bx-user"></i><span>Profile</span></a></li>
+                        <li><a class="dropdown-item" href="{% url 'dashboard' %}"><i class='bx bx-home-circle'></i><span>Dashboard</span></a></li>
+                        <li><div class="dropdown-divider mb-0"></div></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--end header -->

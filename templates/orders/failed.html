@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    Payment Failed
+{% endblock title %}
+
+{% block content %}
+		<div class="stricky-header stricked-menu main-menu">
+			<div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+		</div><!-- /.stricky-header -->
+		<section class="page-header">
+			<div class="page-header__bg" style="background-image: url("{% static 'images/backgrounds/page-header-bg-1-1.jpg' %}");"></div>
+			<!-- /.page-header__bg -->
+			<div class="container">
+				<h2>Payment Failed</h2>
+			</div><!-- /.container -->
+		</section><!-- /.page-header -->
+		
+		<section class="checkout-page">
+			<div class="container">
+				<div class="text-center">
+					<div class="order-payment">
+						<h2>Your Payment Failed</h2>
+					</div>
+					<a href="{% url 'checkout' %}" class="thm-btn">Retry Payment</a>
+				</div><!-- /.col-md-6 -->
+			</div><!-- /.container -->
+		</section><!-- /.checkout-page -->
+
+
+		{% endblock content %}

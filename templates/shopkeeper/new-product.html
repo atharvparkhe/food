@@ -1,0 +1,74 @@
+{% extends '../base3.html' %}
+{% load static %}
+
+{% block title %}
+    New Product | Oganik
+{% endblock title %}
+
+{% block content %}
+    {% include './header.html' %}
+	    <!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+              <div class="card">
+				  <div class="card-body p-4">
+					  <h5 class="card-title">New Product</h5>
+					  <hr/>
+                       <div class="form-body mt-4">
+					    <div class="row">
+						   <div class="col-lg-8">
+                           <div class="border border-3 p-4 rounded">
+							   <form method="POST" enctype="multipart/form-data">
+								{% csrf_token %}
+							<div class="mb-3">
+								<label for="inputProductTitle" class="form-label">Product Title</label>
+								<input type="text" name="name" class="form-control" id="inputProductTitle" placeholder="Poduct Name" required>
+							  </div>
+							  <div class="mb-3">
+								<label for="inputProductDescription" class="form-label">Description</label>
+								<textarea class="form-control" name="desc" placeholder="Product Description" id="inputProductDescription" rows="3" required></textarea>
+							  </div>
+							  <div class="mb-3">
+								<label for="inputProductDescription" class="form-label">Product Image</label>
+								<input id="image-uploadify" name="img" type="file" accept="image/*" single required>
+							  </div>
+                            </div>
+						   </div>
+						   <div class="col-lg-4">
+							<div class="border border-3 p-4 rounded">
+                              <div class="row g-3">
+								<div class="col-md-12">
+									<label for="inputPrice" class="form-label">Price</label>
+									<input type="number" name="price" class="form-control" id="inputPrice" placeholder="00.00" required>
+								  </div>
+								  <div class="col-12">
+									<label for="inputProductType" class="form-label">Food Category</label>
+									<select class="form-select" name="food_category_id" id="" required>
+										<option><<-- Food Category -->></option>
+										{% for category in food_category %}
+										<option value={{category.id}}>{{category.food_category}}</option>
+										{% endfor %}
+									</select>
+									<label for="inputProductType" class="form-label">Food Type</label>
+									<select class="form-select" name="type" id="" required>
+										<option value="Veg">Veg</option>
+										<option value="Non-Veg">Non-Veg</option>
+									</select>
+								  </div>
+								  <div class="col-12">
+									  <div class="d-grid">
+                                         <button type="submit" class="btn btn-primary">Save Product</button>
+									  </div>
+								  </div>
+								</form>
+							  </div> 
+						  </div>
+						  </div>
+					   </div><!--end row-->
+					</div>
+				  </div>
+			  </div>
+			</div>
+		</div>
+		<!--end page wrapper -->
+		{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends '../base2.html' %}
+{% load static %}
+
+{% block title %}
+    Reset | Oganik
+{% endblock title %}
+
+{% block content %}
+
+	<form method="POST" class="login100-form validate-form">
+		{% csrf_token %}
+		<span class="login100-form-title">
+			RESET PASSWORD
+		</span>
+		<div class="wrap-input100 validate-input" data-validate = "Password is required">
+			<input class="input100" type="password" name="npw" placeholder="New Password">
+			<span class="focus-input100"></span>
+		</div>
+
+		<div class="wrap-input100 validate-input" data-validate = "Password is required">
+			<input class="input100" type="password" name="cpw" placeholder="Confirm Password">
+			<span class="focus-input100"></span>
+		</div>
+		
+		<div class="container-login100-form-btn">
+			<button type="submit" class="login100-form-btn">
+				RESET PASSWORD
+			</button>
+		</div>
+	</form>
+
+{% endblock content %}
