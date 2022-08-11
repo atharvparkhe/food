@@ -15,6 +15,7 @@ class send_verification_otp(threading.Thread):
             message = f"The OTP to verify your email is {otp}."
             email_from = settings.EMAIL_HOST_USER
             print("Email send started")
+            print(otp)
             send_mail(subject , message ,email_from ,[self.email])
             print("Email send finished")
         except Exception as e:
@@ -32,6 +33,7 @@ class send_forgot_link(threading.Thread):
             message = f"The link to change your account password http://127.0.0.1:8000/reset/{token} \nIts valid only for 5 mins."
             email_from = settings.EMAIL_HOST_USER
             print("Email send started")
+            print(token)
             send_mail(subject , message ,email_from ,[self.email])
             print("Email send finished")
         except Exception as e:

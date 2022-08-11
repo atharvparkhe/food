@@ -12,7 +12,7 @@ def homePage(request):
     context = {}
     try:
         print(request.user)
-        blog_obj = BlogModel.objects.all()
+        blog_obj = BlogModel.objects.all()[:6]
         rest_obj = RestaurantsModel.objects.all()
         food_obj = FoodModel.objects.filter(is_top_selling=True)
         context["blog_obj"] = blog_obj
